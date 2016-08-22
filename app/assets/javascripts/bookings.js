@@ -1,3 +1,5 @@
+var room_selected = [];
+
 $(document).ready(function(){
   booking_date()
   
@@ -12,6 +14,11 @@ $(document).ready(function(){
     })
 
     $('#bookings').dataTable()
+    
+    
+    $.each($("input[name='booking[room_ids][]']:checked"), function(){            
+      room_selected.push($(this).val());
+    });
 })
 
 function booking_date(){
@@ -49,8 +56,18 @@ function room_available_ajax_call(arrive,departure,room_type){
         data: {booking_dates: {check_in: arrive,check_out: departure, room_type: room_type}},
         success: function(data) {
             for(var room=0; room<data.length; room++) {
-              $('#select_rooms').append("<input type='checkbox' name='booking[room_ids][]' id='room"+ room + "' value=\'" + data[room].room_id + "\'> ")
-              $('#select_rooms').append("<label class='room_lable' for='room"+ room +"'>" + data[room].room_id + "</label>  ")
+              var flag = 0
+              if(room_selected.length > 0){
+                  for(var index=0;index<room_selected.length;index++){
+                    if (room_selected[index] == data[room].room_id){
+                      flag = 1
+                    }       
+                  }
+                }
+              if(flag == 0) {  
+                $('#select_rooms').append("<input type='checkbox' name='booking[room_ids][]' id='room"+ room + "' value=\'" + data[room].room_id + "\'> ")
+                $('#select_rooms').append("<label class='room_lable' for='room"+ room +"'>" + data[room].room_id + "</label>  ")
+              }  
             }
             hide_spinner();
         },
@@ -63,9 +80,4 @@ function room_available_ajax_call(arrive,departure,room_type){
           hide_spinner();
         }
     })
-}
-
-$.urlParam = function(name){
-	var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
-	return results[1] || 0;
 }

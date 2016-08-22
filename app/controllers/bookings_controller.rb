@@ -1,18 +1,19 @@
 class BookingsController < ApplicationController
   before_action :set_booking, only: [:edit, :update, :destroy, :show]
+  before_action :set_category, only: [:create, :new, :update]
+  before_action :authenticate_user!
   
   def index
-    @booking = Booking.all
+    @booking = current_user.bookings.all
   end
 
   def new
-    @category = Category.find_by(:category_type => params[:room_type])
     @booking  = Booking.new
   end
 
   def create
-    @category = Category.find_by(:category_type => params[:room_type])
     @booking = Booking.new(booking_params)
+    @booking.user = current_user
     if @booking.valid?
       @booking.save
       flash[:success] = "Room Book Successfully"
@@ -38,7 +39,6 @@ class BookingsController < ApplicationController
   end
 
   def update
-    @category = Category.find_by(:category_type => params[:room_type])
     if @booking.update(booking_params)
       flash[:success] = "Room Book Successfully updated"
       redirect_to root_path
@@ -65,5 +65,9 @@ class BookingsController < ApplicationController
   
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+  
+  def set_category
+    @category = Category.find_by(:category_type => params[:room_type])
   end
 end

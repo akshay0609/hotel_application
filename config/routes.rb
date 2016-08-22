@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  devise_for :users
   root 'home#index'
   resources :bookings
   post '/bookings/available_rooms' => 'bookings#available_rooms'

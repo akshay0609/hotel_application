@@ -57,12 +57,12 @@
         <% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box + cb.text} %>
     <%end%>
     <br><br>
-    <%else%>
-    <label>Books your Rooms </label><br>
-    <%= render "shared/spinner"%>
-      <p id="select_rooms" class="text-center"></p>
-    <br>
   <%end%>
+  
+  <label>Books your Rooms </label><br>
+  <%= render "shared/spinner"%>
+    <p id="select_rooms" class="text-center"></p>
+  <br>
 
   <%= hidden_field_tag :room_type, params[:room_type] %>
 

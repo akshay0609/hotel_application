@@ -1,4 +1,4 @@
-<div style="margin-top: 7%">
+<div>
   <div class="container">
     <h3 class="text-center">Booking Details</h3>
     <table class=" table table-bordered">
@@ -9,7 +9,7 @@
       </tr>
       <tr>
         <td class=""><label>Room Type</label></td>
-        <td class=""><%= @booking.rooms[0].category.category_type%></td>
+        <td class=""><%= @booking.rooms[0].category.category_type if booking.rooms.count > 0%></td>
       </tr>
       <tr>
         <td class=""><label>Room Booked</label></td>
@@ -34,7 +34,7 @@
       </tbody>
     </table>
     <%= link_to "Back", bookings_path, class:"btn btn-primary"%>
-    <%= link_to "Edit Booking", edit_booking_path(@booking,:room_type => @booking.rooms[0].category.category_type), class:"btn btn-primary" if @booking.check_in >= Date.today%>
+    <%= link_to "Edit Booking", edit_booking_path(@booking,:room_type => @booking.rooms[0].category.category_type), class:"btn btn-primary" if @booking.check_in >= Date.today && booking.rooms.count > 0 %>
     <%= link_to 'Delete this Booking',booking_path(@booking), method: :delete, data: {confirm: "Are you sure?"}, class: "btn btn-danger" %>   
   </div>
 </div>

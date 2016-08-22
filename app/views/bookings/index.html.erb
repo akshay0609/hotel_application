@@ -1,4 +1,4 @@
-<div style="margin-top: 7%">
+<div>
   <h4>Booking Details</h4><hr>
   <div class="thumbnail">
     <div class="caption">
@@ -19,7 +19,7 @@
             <% @booking.each_with_index do |booking, index|%>
                 <tr>
                     <td class="text-center"><%= (index+1) %></td>
-                    <td class="text-center"><%= booking.rooms[0].category.category_type %></td>
+                    <td class="text-center"><%= booking.rooms[0].category.category_type if booking.rooms.count > 0 %></td>
                     <td class="text-center"><%= booking.check_in%></td>
                     <td class="text-center"><%= booking.check_out %></td>
                     <td class="text-center"><%= booking.rooms.pluck(:room_id).join(",") %></td>
