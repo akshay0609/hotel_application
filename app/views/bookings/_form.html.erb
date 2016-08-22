@@ -51,20 +51,19 @@
     <%= booking.text_area :reason, cols: 84, rows: 4, class: "form-control"%>
   </div>  
 
-  <%#if !@booking.new_record? %>
-    <!--<label>Booked Room</label>-->
-    <%#= booking.collection_check_boxes :room_ids, Room.all, :room_id, :room_id  do |cb|%>
-        <%# cb.label(class: "checkbox-inline input_checkbox") {cb.check_box + cb.text} %>
-        <%#= cb.check_box.inspect%>
-    <%#end%>
-  <%#end%>
+  <%if !@booking.new_record? %>
+    <label>Booked Room :- </label>
+    <%= booking.collection_check_boxes :room_ids, @booking.rooms.all, :room_id, :room_id  do |cb|%>
+        <% cb.label(class: "checkbox-inline input_checkbox") {cb.check_box + cb.text} %>
+    <%end%>
+    <br><br>
+    <%else%>
+    <label>Books your Rooms </label><br>
+    <%= render "shared/spinner"%>
+      <p id="select_rooms" class="text-center"></p>
+    <br>
+  <%end%>
 
-  <label>Books your Rooms</label><br>
-  
-  <%= render "shared/spinner"%>
-    <p id="select_rooms" class="text-center"></p>
-  <br>
-  
   <%= hidden_field_tag :room_type, params[:room_type] %>
 
   <div class="action text-center">

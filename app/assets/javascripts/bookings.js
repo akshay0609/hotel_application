@@ -50,7 +50,6 @@ function room_available_ajax_call(arrive,departure,room_type){
         success: function(data) {
             for(var room=0; room<data.length; room++) {
               $('#select_rooms').append("<input type='checkbox' name='booking[room_ids][]' id='room"+ room + "' value=\'" + data[room].room_id + "\'> ")
-              $('#select_rooms').append("<i class='fa fa-bed' for='room"+ room +"' aria-hidden='true'></i> ")
               $('#select_rooms').append("<label class='room_lable' for='room"+ room +"'>" + data[room].room_id + "</label>  ")
             }
             hide_spinner();

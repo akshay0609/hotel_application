@@ -1,5 +1,6 @@
 class BookingsController < ApplicationController
-
+  before_action :set_booking, only: [:edit, :update, :destroy, :show]
+  
   def index
     @booking = Booking.all
   end
@@ -31,13 +32,27 @@ class BookingsController < ApplicationController
   end
 
   def show
-    @booking = Booking.find(params[:id])
   end
 
   def edit
-    @booking = Booking.find(params[:id])
   end
 
+  def update
+    @category = Category.find_by(:category_type => params[:room_type])
+    if @booking.update(booking_params)
+      flash[:success] = "Room Book Successfully updated"
+      redirect_to root_path
+    else
+      render 'edit'
+    end
+  end
+  
+  def destroy
+    @booking.destroy
+    flash[:danger] = "Article successfully deleted"
+    redirect_to bookings_path
+  end
+  
   private
 
   def booking_params
@@ -46,5 +61,9 @@ class BookingsController < ApplicationController
 
   def get_booking_dates_params
     params.require(:booking_dates).permit(:check_in, :check_out, :room_type)
+  end
+  
+  def set_booking
+    @booking = Booking.find(params[:id])
   end
 end

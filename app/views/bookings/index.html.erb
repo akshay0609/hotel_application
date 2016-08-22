@@ -11,7 +11,7 @@
                 <th class="text-center">Check Out</th>
                 <th class="text-center">Rooms Booked</th>
                 <th class="text-center">Resaon</th>
-                <th class="text-center">Create</th>
+                <th class="text-center">Created</th>
                 <th class="text-center">Action</th>
               </tr>
           </thead>
@@ -20,10 +20,10 @@
                 <tr>
                     <td class="text-center"><%= (index+1) %></td>
                     <td class="text-center"><%= booking.rooms[0].category.category_type %></td>
-                    <td class="text-center"><%= booking.rooms.pluck(:room_id).join(",") %></td>
                     <td class="text-center"><%= booking.check_in%></td>
                     <td class="text-center"><%= booking.check_out %></td>
-                    <td class="text-center"><%= booking.reason %></td>
+                    <td class="text-center"><%= booking.rooms.pluck(:room_id).join(",") %></td>
+                    <td class="text-center"><%= truncate(booking.reason, length: 25, omission: '...') %></td>
                     <td class="text-center"><%= booking.created_at.strftime("%m/%d/%Y")  %></td>
                     <td class="text-center"><%= link_to "View", booking_path(booking)%></td>
                 </tr>

@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20160822110232) do
     t.integer "booking_id"
   end
 
-  create_table "rooms", force: :cascade do |t|
+  create_table "rooms", id: false, force: :cascade do |t|
     t.string   "room_id"
     t.integer  "category_id"
     t.datetime "created_at"
