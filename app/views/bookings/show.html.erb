@@ -1,0 +1,35 @@
+<div style="margin-top: 7%">
+  <div class="container">
+    <h3 class="text-center">Booking Details</h3>
+    <table class=" table table-bordered">
+      <tbody>
+      <tr>
+        <td class=""><label>Booking ID</label></td>
+        <td class=""><%= @booking.id%></td>
+      </tr>
+      <tr>
+        <td class=""><label>Room Type</label></td>
+        <td class=""><%= @booking.rooms[0].category.category_type%></td>
+      </tr>
+      <tr>
+        <td class=""><label>Booking check_in</label></td>
+        <td class=""><%= @booking.check_in%></td>
+      </tr>
+      <tr>
+        <td class=""><label>Booking check_out</label></td>
+        <td class=""><%= @booking.check_out%></td>
+      </tr>
+      <tr>
+        <td class=""><label>Reason</label></td>
+        <td class=""><%= @booking.reason%></td>
+      </tr>
+      <tr>
+        <td class=""><label>Booking Created</label></td>
+        <td class=""><%= @booking.created_at.strftime("%m/%d/%Y") %></td>
+      </tr>
+      </tbody>
+    </table>
+    <%= link_to "Back", bookings_path, class:"btn btn-primary"%>
+    <%= link_to "Edit Booking", edit_booking_path(@booking,:room_type => @booking.rooms[0].category.category_type), class:"btn btn-primary" if @booking.check_in >= Date.today%>
+  </div>
+</div>

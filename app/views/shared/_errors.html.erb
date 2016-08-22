@@ -1,0 +1,22 @@
+<% if obj.errors.any? %>
+  <div class="row">
+    <div class="col-xs-10">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <h2 class="panel-title">
+            <%= pluralize(obj.errors.count, "error")%>
+            The following errors prevented the booking form getting created
+            <span class="pull-right closed" data-effect="fadeOut"><i class="fa fa-times"></i></span>
+          </h2>
+          <div class=panel-body>
+              <ul>
+                <% obj.errors.full_messages.each do |error_message|%>
+                  <li><%=error_message%></li>
+                <%end%>
+              </ul>
+          </div>    
+        </div>
+      </div>
+   </div>
+  </div> 
+<%end%>

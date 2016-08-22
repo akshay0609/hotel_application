@@ -1,0 +1,28 @@
+<div class="container" style="margin-top:8%">
+  <%= render "shared/errors", obj: @booking %>
+  
+  <div class="row">
+    <div class="col-md-7 col-sm-7 room-feature">
+      <div class="thumbnail">
+        <div class="caption">
+          <%= render 'bookings/form'%>
+        <!--caption-->
+        </div>
+      <!--thumbnail-->
+      </div>
+    <!-- room-feature-->
+    </div>
+
+   <div class="col-md-5 col-sm-5 room-feature">
+     <div class="">
+       <div class="caption">
+         <h3>Room</h3><hr>
+         <img src="http://images.kuoni.co.uk/73/sofitel-dubai-the-palm-resort-and-spa-31549974-1464100922-ImageGalleryLightbox.jpg" class="text-center" width="500" height="240" alt="Luxury Room"></br>
+         <br>
+         <p><label>Room Features</label> :- <%= @category.facility %></p><br>
+         <p><label>Room Price</label> :- <%= @category.price %> per night</p>
+       </div>
+     </div>
+   </div>
+  </div>
+</div>
