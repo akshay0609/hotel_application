@@ -8,17 +8,9 @@
         <div class="input-group-addon">
          <span class="glyphicon glyphicon-calendar" for="booking_check_in" aria-hidden="true"></span>
         </div>
-        <%= booking.text_field :check_in, class: "booking_date form-control pull-right" %>
+        <%= booking.text_field :check_in, class: "booking_date form-control pull-right", onkeydown:"return false"%>
       </div><br>
-      
-      <div class="input-group date">
-        <p><label for="number_of_adult">Number of Adult</label> :- 
-        <select id="number_of_adult" class="selectpicker from-control">
-          <%1.upto(10) do |number_of_adult|%>
-            <option><%=number_of_adult%></option>
-          <%end%>
-        </select>
-      </div>
+
     <!--col-sm-6-->
     </div>
     
@@ -29,17 +21,8 @@
         <div class="input-group-addon">
          <span class="glyphicon glyphicon-calendar" for="booking_check_out" aria-hidden="true"></span>
         </div>
-        <%= booking.text_field :check_out, class: "booking_date form-control pull-right" %>
+        <%= booking.text_field :check_out, class: "booking_date form-control pull-right", onkeydown:"return false" %>
       </div><br>
-      
-      <div class="form-group">
-        <p><label for="number_of_chlider">Number of Chlider</label> :- 
-        <select id="number_of_chlider" class="from-control selectpicker">
-          <%0.upto(10) do |number_of_chlider|%>
-            <option><%=number_of_chlider%></option>
-          <%end%>
-        </select>                
-      </div>
       
     <!--col-sm-6-->
     </div>
@@ -65,6 +48,12 @@
   <br>
 
   <%= hidden_field_tag :room_type, params[:room_type] %>
+
+  <div class="pull-right">
+    <label>Total Amout :-</label>
+    <font size="5"><span name="amount" id="amount"></span> &#x20B9;</font>
+    <input type="hidden" name="booking[amount]" id="amount_hidden"/>
+  </div><br><br>
 
   <div class="action text-center">
     <%= booking.submit(@booking.new_record? ? "Create Booking" : "Update Booking", class: "btn btn-primary") %>

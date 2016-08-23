@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20160822165036) do
     t.date     "check_in"
     t.date     "check_out"
     t.string   "reason"
+    t.integer  "amount"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20160822165036) do
     t.string   "first_name"
     t.string   "last_name"
     t.text     "address"
+    t.string   "authentication_token"
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"

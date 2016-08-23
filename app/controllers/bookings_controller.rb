@@ -1,8 +1,9 @@
 class BookingsController < ApplicationController
+  before_filter :authenticate_user_from_token!
+  before_action :authenticate_user!
   before_action :set_booking, only: [:edit, :update, :destroy, :show]
   before_action :set_category, only: [:create, :new, :update]
-  before_action :authenticate_user!
-  
+
   def index
     @booking = current_user.bookings.all
   end
@@ -23,15 +24,6 @@ class BookingsController < ApplicationController
     end
   end
 
-  def available_rooms
-    @booking_dates = get_booking_dates_params
-    @rooms = Category.find_by(category_type: @booking_dates[:room_type]).rooms
-    @room = @rooms.select do |room|
-      room if room.available?(@booking_dates[:check_in],@booking_dates[:check_out])
-    end
-    render json: @room
-  end
-
   def show
   end
 
@@ -46,7 +38,7 @@ class BookingsController < ApplicationController
       render 'edit'
     end
   end
-  
+
   def destroy
     @booking.destroy
     flash[:danger] = "Article successfully deleted"
@@ -56,11 +48,7 @@ class BookingsController < ApplicationController
   private
 
   def booking_params
-    params.require(:booking).permit(:check_in, :check_out, :reason, room_ids: [])
-  end
-
-  def get_booking_dates_params
-    params.require(:booking_dates).permit(:check_in, :check_out, :room_type)
+    params.require(:booking).permit(:check_in, :check_out, :reason, :amount,room_ids: [])
   end
   
   def set_booking
