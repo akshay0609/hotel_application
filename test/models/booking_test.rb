@@ -51,8 +51,8 @@ class BookingTest < ActiveSupport::TestCase
     assert_not @booking.valid?
   end
   
-  test "check_out date should not be greater than check_in date" do
-    @booking.check_out = (Date.today >> 1)
+  test "check_out date should not be less than check_in date" do
+    @booking.check_in = (Date.today >> 1)
     assert_not @booking.valid?
   end
   

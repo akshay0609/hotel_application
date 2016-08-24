@@ -18,7 +18,7 @@ class BookingsController < ApplicationController
     if @booking.valid?
       @booking.save
       flash[:success] = "Room Book Successfully"
-      redirect_to root_path
+      redirect_to booking_path(@booking.id)
     else
       render 'new'
     end
@@ -33,7 +33,7 @@ class BookingsController < ApplicationController
   def update
     if @booking.update(booking_params)
       flash[:success] = "Room Book Successfully updated"
-      redirect_to root_path
+      redirect_to booking_path(@booking.id)
     else
       render 'edit'
     end

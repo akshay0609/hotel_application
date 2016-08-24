@@ -23,7 +23,7 @@ class Booking < ActiveRecord::Base
   end
 
   def check_out_date_cannot_be_in_the_past
-    if check_out.present? && check_in.present? && (check_out < Date.today || check_out > check_in)
+    if check_out.present? && check_in.present? && (check_out < Date.today || check_out < check_in)
       errors.add(:check_out, "Date must be higher or equal to today and check_in date")
     end
   end

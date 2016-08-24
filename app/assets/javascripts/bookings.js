@@ -52,7 +52,12 @@ function booking_date(){
     minDate: today,
     maxDate: "+6m",
     onSelect: function(date) {
-       room_available_ajax_call($('#booking_check_in').val(),date,$('#room_name').text());
+       if ($('#booking_check_in').val() > date ) {
+           alert("Check out Date must be higher than check_in date")
+       } else {
+           room_available_ajax_call($('#booking_check_in').val(),date,$('#room_name').text());
+       }
+
      }
   });
 }
@@ -102,29 +107,13 @@ function room_available_ajax_call(arrive,departure,room_type){
 * find date differenc for calculating bill
 */
 function days_between(date1, date2) {
-  //split the values to arrays date1[0] is the year, [1] the month and [2] the day
-  date1 = date1.split('-');
-  date2 = date2.split('-');
+    date1 = new Date(date1+" 00:00:00");
+    date2 = new Date(date2+" 24:00:00");
 
-  //convert the array to a Date object
-  date1 = new Date(date1[0], date1[1], date1[2]);
-  date2 = new Date(date2[0], date2[1], date2[2]);
+    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    var timeDifferenceInDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
 
-  //getTime() method and get the unixtime
-  date1_unixtime = parseInt(date1.getTime() / 1000);
-  date2_unixtime = parseInt(date2.getTime() / 1000);
-
-  //calculated difference in seconds
-  var timeDifference = date2_unixtime - date1_unixtime;
-
-  var timeDifferenceInHours = timeDifference / 60 / 60;
-
-  var timeDifferenceInDays = timeDifferenceInHours  / 24;
-
-  if (timeDifferenceInDays == 0) {
-      return 1
-  }
-  return (timeDifferenceInDays + 1);
+    return (timeDifferenceInDays);
 }
 
 function checkbox_click(){
@@ -147,6 +136,7 @@ function checkbox_click(){
 * calculate total amount of rooms
 */
 function price(){
+
   result = (room_price * days_between($('#booking_check_in').val(),$('#booking_check_out').val()))
   if (room_checke_count != 0) {
     result = (result * room_checke_count)
