@@ -109,13 +109,16 @@ function checkbox_click(){
     if ($('#booking_check_in').val() == "" || $('#booking_check_out').val() == "") {
       alert("Please select Arrival and Depature date")
       $(this).attr('checked', false);
-    }else {
+    }else if($('#booking_check_in').val() > $('#booking_check_out').val()) {
+      alert("Departure date can not be less than Arrival date")
+      $(this).attr('checked', false);
+    } else {
       if (this.checked) {
           room_checked_count = (room_checked_count + 1)
       }else{
           room_checked_count = (room_checked_count - 1)
       }
-      price()
+    price()
     }
   });
 }

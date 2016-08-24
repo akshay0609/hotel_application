@@ -19,7 +19,7 @@ Version
 
     rails server
     
-**Access API for availability of room**
+**Access API for availability of rooms**
 ----------
 1 Create user
  
@@ -36,7 +36,7 @@ E.g rake hotel_app:get_user_token[abc@example.com]
 
 3 Access API
 
-URL :- http://0.0.0.0:3000/api/available_rooms
+URL :- POST http://0.0.0.0:3000/api/available_rooms
 
 params require
 
@@ -50,5 +50,5 @@ params require
 
 - user_email  :- abc@example.com
 
-E.g URL:- http://0.0.0.0:3000/api/available_rooms?user_token=9sMCoa-aT_nf9-ihtF-P&check_in=2016-08-25&check_out=2016-08-28&room_type=DeluxeRooms&user_email=abc@example.com
+E.g URL:- POST http://0.0.0.0:3000/api/available_rooms?user_token=9sMCoa-aT_nf9-ihtF-P&check_in=2016-08-25&check_out=2016-08-28&room_type=Deluxe+Rooms&user_email=abc@example.com
 
