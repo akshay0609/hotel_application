@@ -1,36 +1,49 @@
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <%= link_to "Hotel App", root_path, class: "navbar-brand" %>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li class=""><%= link_to "Home", bookings_path %></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Book Room <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><%= link_to 'Deluxe Rooms', new_booking_path(:room_type => "Deluxe Rooms")%></li>
-                    <li><%= link_to 'Luxury Rooms', new_booking_path(:room_type => "Luxury Rooms")%></li>
-                    <li><%= link_to 'Luxury Suites', new_booking_path(:room_type => "Luxury Suites")%></li>
-                    <li><%= link_to 'Presidential Suites', new_booking_path(:room_type => "Presidential Suites")%></li>
-                  </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+  <div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to "Hotel App", root_path, class: "navbar-brand" %>
     </div>
-    <!-- /.container -->
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <% if user_signed_in? %>
+            <li class=""><%= link_to "Booked Rooms", bookings_path %></li>
+        <%end%>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Book Room <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'Deluxe Rooms', new_booking_path(:room_type => "Deluxe Rooms")%></li>
+            <li><%= link_to 'Luxury Rooms', new_booking_path(:room_type => "Luxury Rooms")%></li>
+            <li><%= link_to 'Luxury Suites', new_booking_path(:room_type => "Luxury Suites")%></li>
+            <li><%= link_to 'Presidential Suites', new_booking_path(:room_type => "Presidential Suites")%></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+               <span class="glyphicon glyphicon-user"></span> Hi <%= current_user.first_name %></span></a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Edit your profile", edit_user_registration_path(current_user)%></li>
+              <li><%= link_to 'Log out', destroy_user_session_path, method: :delete%></li>
+            </ul>
+          </li>
+        <%else%>
+          <li><a href="<%="#{new_user_registration_path}"%>"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+          <li><a href="<%="#{new_user_session_path}"%>"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        <%end%> 
+      </ul>
+    </div>
+   <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container -->
 </nav>

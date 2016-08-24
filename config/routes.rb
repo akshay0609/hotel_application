@@ -1,8 +1,15 @@
 Rails.application.routes.draw do
 
+  devise_for :users
+
   root 'home#index'
+
   resources :bookings
-  post '/bookings/available_rooms' => 'bookings#available_rooms'
+
+  namespace :api do
+    post '/available_rooms' => 'rooms#available_rooms'
+  end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
