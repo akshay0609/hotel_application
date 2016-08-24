@@ -16,5 +16,4 @@
 !/log/.keep
 /tmp
 .byebug_history
-.README.rdoc
 .idea

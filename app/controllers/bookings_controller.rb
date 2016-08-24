@@ -5,7 +5,7 @@ class BookingsController < ApplicationController
   before_action :set_category, only: [:create, :new, :update]
 
   def index
-    @booking = current_user.bookings.all
+    @booking = current_user.bookings.order("id DESC").includes(:user)
   end
 
   def new

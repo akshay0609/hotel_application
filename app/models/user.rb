@@ -6,8 +6,6 @@ class User < ActiveRecord::Base
   has_many :bookings
   before_save :ensure_authentication_token
   validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :address, presence: true, length: {minimum: 10}
 
   def ensure_authentication_token
     if authentication_token.blank?
