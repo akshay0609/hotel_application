@@ -24,7 +24,9 @@ function booking_date(){
     maxDate: "+6m",
     autoclose: true,
     onSelect: function(date) {
-      room_available_ajax_call(date,$('#booking_check_out').val(),$('#room_name').text());
+      if($('#booking_check_out').val() != "") { 
+        room_available_ajax_call(date,$('#booking_check_out').val(),$('#room_name').text());
+      }
      }
   });
 
@@ -38,7 +40,9 @@ function booking_date(){
            $(this).val(check_out_date)
            alert("Departure date can not be less than Arrival date")
        } else {
-           room_available_ajax_call($('#booking_check_in').val(),date,$('#room_name').text());
+           if($('#booking_check_in').val() != "") { 
+            room_available_ajax_call($('#booking_check_in').val(),date,$('#room_name').text());
+          }
        }
      }
   });
@@ -79,7 +83,6 @@ function room_available_ajax_call(arrive,departure,room_type){
     },
     error: function(jqXHR, textStatus, errorThrown) {
       $('#select_rooms').append("<span class='text-center'>Internal Error please try can after some time later</spna>")
-      console.log(textStatus, errorThrown);
       hide_spinner();
     }
   });
