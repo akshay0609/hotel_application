@@ -1,6 +1,7 @@
 require 'test_helper'
 
-class CategoryTest <  ActiveSupport::TestCase
+class CategoryTest < ActiveSupport::TestCase
+  
   def setup
     @category = Category.new(category_type:"Deluxe Rooms", facility:"Queen size Bed", price:7000)
   end

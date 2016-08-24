@@ -2,7 +2,7 @@ module Api
   class RoomsController < ApplicationController
     before_filter :authenticate_user_from_token!
     before_action :authenticate_user!
-
+  
     def available_rooms
       begin
         @booking_dates = get_booking_dates_params
@@ -16,9 +16,9 @@ module Api
         render :nothing => true, :status => 503
       end
     end
-
+  
     private
-
+  
     def get_booking_dates_params
       params.permit(:check_in, :check_out, :room_type)
     end

@@ -1,10 +1,10 @@
 require 'test_helper'
 
-class BookingTest <  ActiveSupport::TestCase
-
+class BookingTest < ActiveSupport::TestCase
+  
   def setup
     Room.create(room_id: "A 123", category_id: 1)
-    @booking = Booking.new(check_in: "2016-09-22", check_out: "2016-09-24", reason: "test application", amount: 17000, user_id: 1, room_ids: ["A 123"])
+    @booking = Booking.new(check_in: Date.today, check_out: Date.today, reason: "test application", amount: 17000, user_id: 1, room_ids: ["A 123"])
   end
 
   test "Should be valid" do
@@ -41,9 +41,28 @@ class BookingTest <  ActiveSupport::TestCase
     assert_not @booking.valid?
   end
 
-  # test "Date should not be less than today date" do
-  #   @booking.check_in = "2015-08-02"
-  #   @booking.valid?
-  #   @booking.errors[:check_in].should_not be_valid
-  # end
+  test "checj_in date should not be less than today date" do
+    @booking.check_in = "2015-08-02"
+    assert_not @booking.valid?
+  end
+  
+  test "check_out date should not be less than today date" do
+    @booking.check_out = "2015-08-02"
+    assert_not @booking.valid?
+  end
+  
+  test "check_out date should not be greater than check_in date" do
+    @booking.check_out = (Date.today >> 1)
+    assert_not @booking.valid?
+  end
+  
+  test "check_in date should not be more than 6 months" do
+    @booking.check_in = (Date.today >> 8)
+    assert_not @booking.valid?
+  end
+  
+  test "check_out date should not be more than 6 months" do
+    @booking.check_out = (Date.today >> 8)
+    assert_not @booking.valid?
+  end
 end

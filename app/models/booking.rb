@@ -13,15 +13,30 @@ class Booking < ActiveRecord::Base
   validate :check_in_date_cannot_be_in_the_past
   validate :check_out_date_cannot_be_in_the_past
 
+  validate :check_in_date_cannot_be_more_than_6_months
+  validate :check_out_date_cannot_be_more_than_6_months
+  
   def check_in_date_cannot_be_in_the_past
-    if check_in.present? && check_in < Date.today && check_out > (Date.today >> 6)
+    if check_in.present? && check_in < Date.today 
       errors.add(:check_in, "Date must be higher or equal to today")
     end
   end
 
   def check_out_date_cannot_be_in_the_past
-    if check_out.present? && check_in.present? && (check_out < Date.today || check_out < check_in) && check_in > (Date.today >> 6)
+    if check_out.present? && check_in.present? && (check_out < Date.today || check_out > check_in)
       errors.add(:check_out, "Date must be higher or equal to today and check_in date")
+    end
+  end
+  
+  def check_in_date_cannot_be_more_than_6_months
+    if check_in.present? && check_in > (Date.today >> 6)
+      errors.add(:check_in, "check_out date cannot be more than 6 months")
+    end
+  end
+  
+  def check_out_date_cannot_be_more_than_6_months
+    if check_out.present? && check_out > (Date.today >> 6)
+      errors.add(:check_out, "check_out date cannot be more than 6 months")
     end
   end
 end

@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-sm-6">
       <label for="booking_check_in">Arrival</label>
-    
+
       <div class="input-group date">
         <div class="input-group-addon">
          <span class="glyphicon glyphicon-calendar" for="booking_check_in" aria-hidden="true"></span>
@@ -34,6 +34,7 @@
     <%= booking.text_area :reason, cols: 84, rows: 4, class: "form-control"%>
   </div>  
 
+  <!-- Booked rooms only shows at update page -->
   <%if !@booking.new_record? %>
     <label>Booked Room :- </label>
     <%= booking.collection_check_boxes :room_ids, @booking.rooms.all, :room_id, :room_id  do |cb|%>
@@ -46,7 +47,8 @@
   <%= render "shared/spinner"%>
     <p id="select_rooms" class="text-center"></p>
   <br>
-
+  
+  <!-- create hide tag for send room category type to controller --> 
   <%= hidden_field_tag :room_type, params[:room_type] %>
 
   <div class="pull-right">
