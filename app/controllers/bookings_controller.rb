@@ -41,7 +41,7 @@ class BookingsController < ApplicationController
 
   def destroy
     @booking.destroy
-    flash[:danger] = "Article successfully deleted"
+    flash[:danger] = "Room successfully deleted"
     redirect_to bookings_path
   end
   

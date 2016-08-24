@@ -36,7 +36,7 @@ function booking_date(){
     onSelect: function(date) {
        if ($('#booking_check_in').val() > date ) {
            $(this).val(check_out_date)
-           alert("Departure Date must be higher than Arrival date")
+           alert("Departure date can not be less than Arrival date")
        } else {
            room_available_ajax_call($('#booking_check_in').val(),date,$('#room_name').text());
        }
