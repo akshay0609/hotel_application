@@ -4,8 +4,11 @@ class BookingsController < ApplicationController
   before_action :set_booking, only: [:edit, :update, :destroy, :show]
   before_action :set_category, only: [:create, :new, :update]
 
+  caches_page :index, :show, :new
+  cache_sweeper :booking_sweeper
+
   def index
-    @booking = current_user.bookings.order("id DESC").includes(:user)
+    @booking = current_user.bookings.order("id DESC").includes(:rooms,{:rooms => :category})
   end
 
   def new

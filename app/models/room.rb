@@ -11,7 +11,7 @@ class Room < ActiveRecord::Base
   def available?(check_in_date,check_out_date)
     if !self.bookings.blank? && (self.bookings.where(:check_in => check_in_date..check_out_date).count > 0 ||
                                  self.bookings.where(:check_out => check_in_date..check_out_date).count > 0 ||
-                                 self.bookings.where("check_in <= ? AND check_out >= ?",check_in_date,check_out_date).count > 0) #todo make it or condition
+                                 self.bookings.where("check_in <= ? AND check_out >= ?",check_in_date,check_out_date).count > 0)
       return false
     else
       return true

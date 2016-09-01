@@ -13,6 +13,8 @@ gem "font-awesome-rails"
 gem 'jquery-datatables-rails', '~> 3.3.0'
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'rails-observers'
+gem 'actionpack-page_caching'
 
 group :development, :test do
   gem 'byebug'
